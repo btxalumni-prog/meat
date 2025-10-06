@@ -1,27 +1,7 @@
-// Search Page Logic
+// Search Page Logic - Using same logic as landing page
 let currentFilter = 'all';
 let allResults = [];
 let searchTimeout = null;
-
-// Import data from appData (defined in app.js)
-let blogData = [];
-let meatData = {};
-
-// Wait for app.js to load and copy data
-function initializeData() {
-    if (typeof appData !== 'undefined') {
-        blogData = appData.blogPosts.map(post => ({
-            id: post.id,
-            title: post.title,
-            excerpt: post.excerpt,
-            content: post.content,
-            category: post.category,
-            date: post.publishDate,
-            tags: post.tags
-        }));
-        meatData = appData.meatTypes;
-    }
-}
 
 // Get URL parameters
 function getSearchQuery() {
@@ -31,9 +11,6 @@ function getSearchQuery() {
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize data from appData
-    initializeData();
-
     const query = getSearchQuery();
     const searchInput = document.getElementById('search-input');
 
@@ -126,13 +103,88 @@ function updateClearButton() {
     }
 }
 
-// Perform search
+// Perform search - using same logic as landing page
 function performSearch(query) {
     showLoading();
+    const lowerQuery = query.toLowerCase();
 
     // Simulate search delay
     setTimeout(() => {
-        const results = searchContent(query);
+        let results = [];
+
+        // Search in blogs - same logic as landing page
+        if (currentFilter === 'all' || currentFilter === 'blog') {
+            if (typeof appData !== 'undefined' && appData.blogPosts) {
+                const blogResults = appData.blogPosts.filter(post =>
+                    post.title.toLowerCase().includes(lowerQuery) ||
+                    post.excerpt.toLowerCase().includes(lowerQuery) ||
+                    post.content.toLowerCase().includes(lowerQuery) ||
+                    post.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+                ).map(post => {
+                    const titleMatch = post.title.toLowerCase().includes(lowerQuery);
+                    const excerptMatch = post.excerpt.toLowerCase().includes(lowerQuery);
+                    const contentMatch = post.content.toLowerCase().includes(lowerQuery);
+                    const tagsMatch = post.tags.some(tag => tag.toLowerCase().includes(lowerQuery));
+
+                    return {
+                        type: 'blog',
+                        id: post.id,
+                        title: post.title,
+                        excerpt: post.excerpt,
+                        content: post.content,
+                        category: post.category,
+                        date: post.publishDate,
+                        relevance: titleMatch ? 10 : (excerptMatch ? 8 : (tagsMatch ? 6 : 3))
+                    };
+                });
+                results = results.concat(blogResults);
+            }
+        }
+
+        // Search in dictionary - same logic as landing page
+        if (currentFilter === 'all' || currentFilter === 'dictionary') {
+            if (typeof appData !== 'undefined' && appData.meatTypes) {
+                Object.entries(appData.meatTypes).forEach(([meatType, meat]) => {
+                    // Search meat type name
+                    if (meat.name.toLowerCase().includes(lowerQuery)) {
+                        results.push({
+                            type: 'dictionary',
+                            id: meatType,
+                            title: meat.name,
+                            excerpt: meat.description,
+                            meatType: meatType,
+                            level: null,
+                            content: meat.description,
+                            relevance: 9
+                        });
+                    }
+
+                    // Search freshness levels
+                    Object.entries(meat.levels).forEach(([level, data]) => {
+                        const nameMatch = data.name.toLowerCase().includes(lowerQuery);
+                        const propsMatch = data.properties.toLowerCase().includes(lowerQuery);
+                        const signsMatch = data.signs.toLowerCase().includes(lowerQuery);
+                        const storageMatch = data.storage.toLowerCase().includes(lowerQuery);
+
+                        if (nameMatch || propsMatch || signsMatch || storageMatch) {
+                            results.push({
+                                type: 'dictionary',
+                                id: `${meatType}-${level}`,
+                                title: `${meat.name} - ${data.name}`,
+                                excerpt: data.properties,
+                                meatType: meatType,
+                                level: level,
+                                content: `${data.signs} ${data.storage}`,
+                                relevance: nameMatch ? 8 : (propsMatch ? 6 : 4)
+                            });
+                        }
+                    });
+                });
+            }
+        }
+
+        // Sort by relevance initially
+        results.sort((a, b) => b.relevance - a.relevance);
         allResults = results;
 
         if (results.length > 0) {
@@ -141,68 +193,6 @@ function performSearch(query) {
             showNoResults();
         }
     }, 500);
-}
-
-// Search content
-function searchContent(query) {
-    const lowerQuery = query.toLowerCase();
-    let results = [];
-
-    // Search in blogs
-    if (currentFilter === 'all' || currentFilter === 'blog') {
-        if (blogData && blogData.length > 0) {
-            blogData.forEach(blog => {
-                const titleMatch = blog.title.toLowerCase().includes(lowerQuery);
-                const contentMatch = blog.content.toLowerCase().includes(lowerQuery);
-                const excerptMatch = blog.excerpt.toLowerCase().includes(lowerQuery);
-
-                if (titleMatch || contentMatch || excerptMatch) {
-                    results.push({
-                        type: 'blog',
-                        id: blog.id,
-                        title: blog.title,
-                        excerpt: blog.excerpt,
-                        content: blog.content,
-                        category: blog.category,
-                        date: blog.date,
-                        relevance: titleMatch ? 10 : (excerptMatch ? 5 : 1)
-                    });
-                }
-            });
-        }
-    }
-
-    // Search in dictionary
-    if (currentFilter === 'all' || currentFilter === 'dictionary') {
-        if (meatData && Object.keys(meatData).length > 0) {
-            Object.keys(meatData).forEach(meatType => {
-                const meatInfo = meatData[meatType];
-
-                Object.keys(meatInfo.levels).forEach(levelKey => {
-                    const level = meatInfo.levels[levelKey];
-                    const searchableText = `${level.name} ${level.properties} ${level.signs} ${level.storage}`.toLowerCase();
-
-                    if (searchableText.includes(lowerQuery)) {
-                        results.push({
-                            type: 'dictionary',
-                            id: `${meatType}-${levelKey}`,
-                            title: `${meatInfo.name} - ${level.name}`,
-                            excerpt: level.properties,
-                            meatType: meatType,
-                            level: levelKey,
-                            content: `${level.signs} ${level.storage}`,
-                            relevance: level.name.toLowerCase().includes(lowerQuery) ? 8 : 3
-                        });
-                    }
-                });
-            });
-        }
-    }
-
-    // Sort by relevance initially
-    results.sort((a, b) => b.relevance - a.relevance);
-
-    return results;
 }
 
 // Display results
@@ -234,6 +224,7 @@ function createResultCard(result) {
 
     const searchInput = document.getElementById('search-input');
     const query = searchInput.value.trim();
+    const highlightedTitle = highlightText(result.title, query);
     const highlightedExcerpt = highlightText(result.excerpt, query);
 
     const formattedDate = result.date ? formatDate(result.date) : '';
@@ -241,7 +232,7 @@ function createResultCard(result) {
     card.innerHTML = `
         ${typeBadge}
         <div class="result-card-header">
-            <h3 class="result-title">${result.title}</h3>
+            <h3 class="result-title">${highlightedTitle}</h3>
         </div>
         <p class="result-excerpt">${highlightedExcerpt}</p>
         <div class="result-meta">
@@ -254,14 +245,18 @@ function createResultCard(result) {
         if (result.type === 'blog') {
             window.location.href = `index.html#blog-${result.id}`;
         } else {
-            window.location.href = `index.html#dictionary-${result.meatType}-${result.level}`;
+            if (result.level) {
+                window.location.href = `index.html#dictionary-${result.meatType}-${result.level}`;
+            } else {
+                window.location.href = `index.html#dictionary`;
+            }
         }
     });
 
     return card;
 }
 
-// Highlight search term
+// Highlight search term - same as landing page
 function highlightText(text, query) {
     if (!query) return text;
 
