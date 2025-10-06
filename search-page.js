@@ -3,6 +3,26 @@ let currentFilter = 'all';
 let allResults = [];
 let searchTimeout = null;
 
+// Import data from appData (defined in app.js)
+let blogData = [];
+let meatData = {};
+
+// Wait for app.js to load and copy data
+function initializeData() {
+    if (typeof appData !== 'undefined') {
+        blogData = appData.blogPosts.map(post => ({
+            id: post.id,
+            title: post.title,
+            excerpt: post.excerpt,
+            content: post.content,
+            category: post.category,
+            date: post.publishDate,
+            tags: post.tags
+        }));
+        meatData = appData.meatTypes;
+    }
+}
+
 // Get URL parameters
 function getSearchQuery() {
     const params = new URLSearchParams(window.location.search);
@@ -11,6 +31,9 @@ function getSearchQuery() {
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize data from appData
+    initializeData();
+
     const query = getSearchQuery();
     const searchInput = document.getElementById('search-input');
 
@@ -74,6 +97,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // Suggestion buttons event delegation
+    const suggestionTags = document.getElementById('suggestion-tags');
+    if (suggestionTags) {
+        suggestionTags.addEventListener('click', (e) => {
+            if (e.target.classList.contains('suggestion-tag')) {
+                const query = e.target.getAttribute('data-query');
+                if (query) {
+                    searchInput.value = query;
+                    updateClearButton();
+                    performSearch(query);
+                }
+            }
+        });
+    }
 });
 
 // Update clear button visibility
@@ -112,7 +150,7 @@ function searchContent(query) {
 
     // Search in blogs
     if (currentFilter === 'all' || currentFilter === 'blog') {
-        if (typeof blogData !== 'undefined') {
+        if (blogData && blogData.length > 0) {
             blogData.forEach(blog => {
                 const titleMatch = blog.title.toLowerCase().includes(lowerQuery);
                 const contentMatch = blog.content.toLowerCase().includes(lowerQuery);
@@ -136,7 +174,7 @@ function searchContent(query) {
 
     // Search in dictionary
     if (currentFilter === 'all' || currentFilter === 'dictionary') {
-        if (typeof meatData !== 'undefined') {
+        if (meatData && Object.keys(meatData).length > 0) {
             Object.keys(meatData).forEach(meatType => {
                 const meatInfo = meatData[meatType];
 
@@ -198,6 +236,8 @@ function createResultCard(result) {
     const query = searchInput.value.trim();
     const highlightedExcerpt = highlightText(result.excerpt, query);
 
+    const formattedDate = result.date ? formatDate(result.date) : '';
+
     card.innerHTML = `
         ${typeBadge}
         <div class="result-card-header">
@@ -206,7 +246,7 @@ function createResultCard(result) {
         <p class="result-excerpt">${highlightedExcerpt}</p>
         <div class="result-meta">
             ${result.category ? `<span class="result-meta-item">📂 ${result.category}</span>` : ''}
-            ${result.date ? `<span class="result-meta-item">📅 ${result.date}</span>` : ''}
+            ${formattedDate ? `<span class="result-meta-item">📅 ${formattedDate}</span>` : ''}
         </div>
     `;
 
@@ -234,6 +274,22 @@ function escapeRegex(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// Format date helper
+function formatDate(dateString) {
+    try {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return dateString;
+
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    } catch (e) {
+        return dateString;
+    }
+}
+
 // Sort results
 function sortResults(sortType) {
     switch(sortType) {
@@ -242,27 +298,19 @@ function sortResults(sortType) {
             break;
         case 'newest':
             allResults.sort((a, b) => {
-                const dateA = a.date ? new Date(a.date.split('/').reverse().join('-')) : new Date(0);
-                const dateB = b.date ? new Date(b.date.split('/').reverse().join('-')) : new Date(0);
+                const dateA = a.date ? new Date(a.date) : new Date(0);
+                const dateB = b.date ? new Date(b.date) : new Date(0);
                 return dateB - dateA;
             });
             break;
         case 'oldest':
             allResults.sort((a, b) => {
-                const dateA = a.date ? new Date(a.date.split('/').reverse().join('-')) : new Date(0);
-                const dateB = b.date ? new Date(b.date.split('/').reverse().join('-')) : new Date(0);
+                const dateA = a.date ? new Date(a.date) : new Date(0);
+                const dateB = b.date ? new Date(b.date) : new Date(0);
                 return dateA - dateB;
             });
             break;
     }
-}
-
-// Search suggestion click
-function searchSuggestion(term) {
-    const searchInput = document.getElementById('search-input');
-    searchInput.value = term;
-    updateClearButton();
-    performSearch(term);
 }
 
 // UI State Management
