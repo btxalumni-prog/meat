@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tìm kiếm kiến thức về thịt tươi">
+    <title>Tìm kiếm - Thịt Tươi Rói</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="search-page.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <h1 class="logo" onclick="window.location.href='index.html'">🥩 Thịt Tươi Rói</h1>
+                <nav class="nav">
+                    <button class="nav__btn" onclick="window.location.href='index.html'">Trang chủ</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="search-page-main">
+        <div class="container">
+            <div class="search-header-section">
+                <h1 class="search-page-title">Tìm kiếm kiến thức</h1>
+                <p class="search-page-subtitle">Khám phá mọi thông tin về thịt tươi và an toàn thực phẩm</p>
+
+                <div class="search-bar-container">
+                    <div class="search-input-group">
+                        <span class="search-icon-large">🔍</span>
+                        <input
+                            type="text"
+                            id="search-input"
+                            class="search-input-large"
+                            placeholder="Nhập từ khóa tìm kiếm..."
+                            autofocus
+                        >
+                        <button class="search-clear-btn" id="clear-btn">✕</button>
+                    </div>
+
+                    <div class="search-filters-row">
+                        <button class="filter-chip active" data-filter="all">Tất cả</button>
+                        <button class="filter-chip" data-filter="blog">📝 Blog</button>
+                        <button class="filter-chip" data-filter="dictionary">📖 Từ điển</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-results-section">
+                <div class="results-header" id="results-header">
+                    <span class="results-count" id="results-count"></span>
+                    <div class="sort-options">
+                        <select id="sort-select" class="sort-select">
+                            <option value="relevance">Liên quan nhất</option>
+                            <option value="newest">Mới nhất</option>
+                            <option value="oldest">Cũ nhất</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="search-results" class="search-results-grid">
+                    <!-- Results will be populated here -->
+                </div>
+
+                <div id="no-results" class="no-results-state hidden">
+                    <div class="no-results-icon">🔍</div>
+                    <h3>Không tìm thấy kết quả</h3>
+                    <p>Hãy thử tìm kiếm với từ khóa khác hoặc xem các gợi ý bên dưới</p>
+                </div>
+
+                <div id="initial-state" class="initial-state">
+                    <div class="initial-state-icon">💡</div>
+                    <h3>Bắt đầu tìm kiếm</h3>
+                    <p>Nhập từ khóa để khám phá kiến thức về thịt tươi</p>
+
+                    <div class="search-suggestions">
+                        <h4>Từ khóa phổ biến:</h4>
+                        <div class="suggestion-tags">
+                            <button class="suggestion-tag" onclick="searchSuggestion('thịt bò tươi')">thịt bò tươi</button>
+                            <button class="suggestion-tag" onclick="searchSuggestion('bảo quản thịt')">bảo quản thịt</button>
+                            <button class="suggestion-tag" onclick="searchSuggestion('kiểm tra độ tươi')">kiểm tra độ tươi</button>
+                            <button class="suggestion-tag" onclick="searchSuggestion('thịt heo')">thịt heo</button>
+                            <button class="suggestion-tag" onclick="searchSuggestion('an toàn thực phẩm')">an toàn thực phẩm</button>
+                            <button class="suggestion-tag" onclick="searchSuggestion('thịt gà')">thịt gà</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loading-state" class="loading-state hidden">
+                    <div class="loading-spinner"></div>
+                    <p>Đang tìm kiếm...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="search-page.js"></script>
+</body>
+</html>

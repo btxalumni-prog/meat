@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "buildCommand": "echo 'No build needed'",
+  "outputDirectory": ".",
+  "env": {
+    "FASTAPI_URL": "https://thienphuc12339-meat.hf.space"
+  }
+}

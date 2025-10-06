@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Ứng dụng AI kiểm tra độ tươi của thịt, từ điển độ tươi và blog an toàn thực phẩm">
+    <meta name="theme-color" content="#e85d75">
+    <title>🥩 Thịt Tươi Rói - Ứng dụng kiểm tra độ tươi thịt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="landing-immersive.css">
+    <link rel="stylesheet" href="animated-background.css">
+</head>
+<body>
+    <!-- Animated Background Pattern -->
+    <div class="meat-pattern-container">
+        <div class="meat-icon-float">🥩</div>
+        <div class="meat-icon-float">🐷</div>
+        <div class="meat-icon-float">🐮</div>
+        <div class="meat-icon-float">🐔</div>
+        <div class="meat-icon-float">✨</div>
+        <div class="meat-icon-float">🔬</div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <h1 class="logo" onclick="showPage('home')">🥩 Thịt Tươi Rói</h1>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <span id="menu-icon">☰</span>
+                </button>
+                <nav class="nav" id="main-nav">
+                    <button class="nav__btn" onclick="showPage('home'); closeMobileMenu();">Trang chủ</button>
+                    <button class="nav__btn" onclick="showPage('blog'); closeMobileMenu();">Blog</button>
+                    <button class="nav__btn" onclick="showPage('dictionary'); closeMobileMenu();">Từ điển</button>
+                    <button class="nav__btn" onclick="showPage('detection'); closeMobileMenu();">Kiểm tra thịt</button>
+                    <button class="nav__btn nav__btn--user" id="mobile-user-btn" onclick="handleUserIconClick(); closeMobileMenu();">
+                        <span id="mobile-user-icon">👤</span>
+                        <span id="mobile-user-label">Tài khoản</span>
+                    </button>
+                </nav>
+                <div class="header-actions">
+                    <button class="user-icon-btn" id="user-icon-btn" onclick="handleUserIconClick()" title="Tài khoản">
+                        <span id="user-icon">👤</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Homepage -->
+        <div id="home-page" class="page active">
+            <!-- Immersive Hero Section -->
+            <section class="hero-immersive">
+                <div class="hero-background">
+                    <img src="https://images.pexels.com/photos/3688/food-dinner-lunch-chicken.jpg?auto=compress&cs=tinysrgb&w=1920" alt="Fresh meat" class="hero-bg-image">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content-immersive">
+                    <div class="hero-badge fade-in-up" style="animation-delay: 0.2s">
+                        <span class="badge-icon">🥩</span>
+                        <span>Công nghệ AI hàng đầu</span>
+                    </div>
+                    <h1 class="hero-title-immersive fade-in-up" style="animation-delay: 0.4s">
+                        Biết Thịt Tươi<br>
+                        <span class="gradient-text">Trong Tích Tắc</span>
+                    </h1>
+                    <p class="hero-description-immersive fade-in-up" style="animation-delay: 0.6s">
+                        Ứng dụng AI giúp bạn kiểm tra độ tươi của thịt chỉ bằng một cú chụp.<br>
+                        An toàn cho gia đình, yên tâm cho bữa ăn.
+                    </p>
+
+                    <!-- Global Search -->
+                    <div class="global-search-immersive fade-in-up" style="animation-delay: 0.8s">
+                        <div class="search-container">
+                            <div class="search-input-wrapper">
+                                <span class="search-icon" onclick="navigateToSearch()">🔍</span>
+                                <input
+                                    type="text"
+                                    class="global-search-input"
+                                    id="global-search-input"
+                                    placeholder="Tìm kiếm kiến thức về thịt tươi..."
+                                    onkeypress="handleSearchKeyPress(event)"
+                                >
+                            </div>
+                            <div class="search-filters">
+                                <button class="search-filter-btn active">Tất cả</button>
+                                <button class="search-filter-btn">📝 Blog</button>
+                                <button class="search-filter-btn">📖 Từ điển</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-cta-group fade-in-up" style="animation-delay: 1s">
+                        <button class="btn-immersive btn-immersive-primary" onclick="showPage('detection')">
+                            <span class="btn-icon">📸</span>
+                            <span>Kiểm tra ngay</span>
+                        </button>
+                        <button class="btn-immersive btn-immersive-secondary" onclick="document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'})">
+                            <span>Xem cách hoạt động</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+
+                    <div class="trust-badges fade-in-up" style="animation-delay: 1.2s">
+                        <div class="trust-item">
+                            <span class="trust-icon">✓</span>
+                            <span>Độ chính xác 95%</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-icon">⚡</span>
+                            <span>Kết quả tức thì</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-icon">🔒</span>
+                            <span>Bảo mật tuyệt đối</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-indicator">
+                    <span class="scroll-text">Cuộn xuống để khám phá</span>
+                    <span class="scroll-arrow">↓</span>
+                </div>
+            </section>
+
+            <div class="container">
+
+                <!-- Stats Section with Animation -->
+                <section class="stats-journey scroll-reveal">
+                    <div class="section-header-center">
+                        <span class="section-label">Con số ấn tượng</span>
+                        <h2 class="section-title-large">Được tin dùng bởi hàng nghìn người</h2>
+                    </div>
+                    <div class="stats-grid-modern">
+                        <div class="stat-card-modern" data-stat="1247">
+                            <div class="stat-icon">📱</div>
+                            <div class="stat-number-modern">0</div>
+                            <div class="stat-label-modern">Lượt kiểm tra thành công</div>
+                            <div class="stat-progress"></div>
+                        </div>
+                        <div class="stat-card-modern" data-stat="95">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-number-modern">0<span class="stat-unit">%</span></div>
+                            <div class="stat-label-modern">Độ chính xác AI</div>
+                            <div class="stat-progress"></div>
+                        </div>
+                        <div class="stat-card-modern" data-stat="3">
+                            <div class="stat-icon">🥩</div>
+                            <div class="stat-number-modern">0</div>
+                            <div class="stat-label-modern">Loại thịt được hỗ trợ</div>
+                            <div class="stat-progress"></div>
+                        </div>
+                        <div class="stat-card-modern" data-stat="15">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-number-modern">0</div>
+                            <div class="stat-label-modern">Bài viết chuyên môn</div>
+                            <div class="stat-progress"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How It Works Journey -->
+                <section id="how-it-works" class="how-it-works-journey scroll-reveal">
+                    <div class="section-header-center">
+                        <span class="section-label">Đơn giản và nhanh chóng</span>
+                        <h2 class="section-title-large">Chỉ 3 bước để biết thịt có tươi</h2>
+                        <p class="section-description">Công nghệ AI giúp bạn kiểm tra ngay lập tức</p>
+                    </div>
+
+                    <div class="journey-timeline">
+                        <div class="journey-step scroll-reveal" style="transition-delay: 0.1s">
+                            <div class="step-visual">
+                                <img src="https://images.pexels.com/photos/1092671/pexels-photo-1092671.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Take photo" class="step-image">
+                                <div class="step-number">01</div>
+                            </div>
+                            <div class="step-content">
+                                <h3 class="step-title">Chụp ảnh thịt</h3>
+                                <p class="step-description">Mở camera hoặc tải ảnh lên. Hệ thống AI sẽ tự động phân tích chất lượng thịt của bạn.</p>
+                                <ul class="step-features">
+                                    <li>✓ Hỗ trợ camera trực tiếp</li>
+                                    <li>✓ Hoặc tải ảnh từ thư viện</li>
+                                    <li>✓ Tự động tối ưu độ sáng</li>
+                                </ul>
+                            </div>
+                            <div class="step-connector"></div>
+                        </div>
+
+                        <div class="journey-step scroll-reveal" style="transition-delay: 0.2s">
+                            <div class="step-visual">
+                                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800" alt="AI Analysis" class="step-image">
+                                <div class="step-number">02</div>
+                            </div>
+                            <div class="step-content">
+                                <h3 class="step-title">AI phân tích</h3>
+                                <p class="step-description">Công nghệ trí tuệ nhân tạo phân tích màu sắc, độ tươi và đưa ra kết quả chi tiết.</p>
+                                <ul class="step-features">
+                                    <li>✓ Phân tích trong 2 giây</li>
+                                    <li>✓ Độ chính xác cao 95%</li>
+                                    <li>✓ Công nghệ deep learning</li>
+                                </ul>
+                            </div>
+                            <div class="step-connector"></div>
+                        </div>
+
+                        <div class="journey-step scroll-reveal" style="transition-delay: 0.3s">
+                            <div class="step-visual">
+                                <img src="https://images.pexels.com/photos/4393021/pexels-photo-4393021.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Results" class="step-image">
+                                <div class="step-number">03</div>
+                            </div>
+                            <div class="step-content">
+                                <h3 class="step-title">Nhận kết quả</h3>
+                                <p class="step-description">Xem báo cáo chi tiết về độ tươi, khuyến nghị sử dụng và cách bảo quản tốt nhất.</p>
+                                <ul class="step-features">
+                                    <li>✓ Đánh giá 5 cấp độ tươi</li>
+                                    <li>✓ Gợi ý cách chế biến</li>
+                                    <li>✓ Hướng dẫn bảo quản</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-center">
+                        <button class="btn-immersive btn-immersive-primary btn-large" onclick="showPage('detection')">
+                            <span>Thử ngay miễn phí</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Meat Dictionary with Visual Cards -->
+                <section class="meat-dictionary-visual scroll-reveal">
+                    <div class="section-header-center">
+                        <span class="section-label">Kiến thức chuyên sâu</span>
+                        <h2 class="section-title-large">Từ điển thịt tươi toàn diện</h2>
+                        <p class="section-description">Tìm hiểu chi tiết về từng loại thịt và cách nhận biết độ tươi</p>
+                    </div>
+
+                    <div class="meat-visual-grid">
+                        <div class="meat-visual-card scroll-reveal" onclick="showMeatDictionary('pork')" style="transition-delay: 0.1s">
+                            <div class="meat-visual-image">
+                                <img src="https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pork" class="meat-img">
+                                <div class="meat-overlay">
+                                    <span class="meat-explore">Khám phá →</span>
+                                </div>
+                            </div>
+                            <div class="meat-visual-content">
+                                <div class="meat-icon-large">🐷</div>
+                                <h3 class="meat-visual-title">Thịt Heo</h3>
+                                <p class="meat-visual-desc">5 cấp độ tươi • Hướng dẫn chi tiết • Mẹo bảo quản</p>
+                                <div class="meat-tags">
+                                    <span class="meat-tag">Phổ biến nhất</span>
+                                    <span class="meat-tag">Dễ nhận biết</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="meat-visual-card scroll-reveal" onclick="showMeatDictionary('beef')" style="transition-delay: 0.2s">
+                            <div class="meat-visual-image">
+                                <img src="https://images.pexels.com/photos/1268101/pexels-photo-1268101.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Beef" class="meat-img">
+                                <div class="meat-overlay">
+                                    <span class="meat-explore">Khám phá →</span>
+                                </div>
+                            </div>
+                            <div class="meat-visual-content">
+                                <div class="meat-icon-large">🐮</div>
+                                <h3 class="meat-visual-title">Thịt Bò</h3>
+                                <p class="meat-visual-desc">5 cấp độ tươi • Kỹ thuật aging • Cách chọn phần thịt</p>
+                                <div class="meat-tags">
+                                    <span class="meat-tag">Cao cấp</span>
+                                    <span class="meat-tag">Giàu dinh dưỡng</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="meat-visual-card scroll-reveal" onclick="showMeatDictionary('chicken')" style="transition-delay: 0.3s">
+                            <div class="meat-visual-image">
+                                <img src="https://images.pexels.com/photos/2338323/pexels-photo-2338323.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Chicken" class="meat-img">
+                                <div class="meat-overlay">
+                                    <span class="meat-explore">Khám phá →</span>
+                                </div>
+                            </div>
+                            <div class="meat-visual-content">
+                                <div class="meat-icon-large">🐔</div>
+                                <h3 class="meat-visual-title">Thịt Gà</h3>
+                                <p class="meat-visual-desc">5 cấp độ tươi • Phân biệt gà ta/công nghiệp • An toàn</p>
+                                <div class="meat-tags">
+                                    <span class="meat-tag">Ít béo</span>
+                                    <span class="meat-tag">Dễ chế biến</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Why Choose Us Section -->
+                <section class="why-choose-us scroll-reveal">
+                    <div class="why-choose-content">
+                        <div class="why-text">
+                            <span class="section-label">Tại sao chọn chúng tôi</span>
+                            <h2 class="section-title-large">Công nghệ AI hàng đầu<br>cho sức khỏe gia đình</h2>
+                            <p class="section-description">Chúng tôi sử dụng công nghệ deep learning tiên tiến, được đào tạo trên hàng nghìn mẫu thịt để đảm bảo độ chính xác cao nhất.</p>
+
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon">🎯</div>
+                                    <div class="feature-text">
+                                        <h4>Độ chính xác cao</h4>
+                                        <p>AI được train trên 10,000+ hình ảnh thịt thực tế</p>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">⚡</div>
+                                    <div class="feature-text">
+                                        <h4>Phản hồi tức thì</h4>
+                                        <p>Kết quả phân tích trong vòng 2 giây</p>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">🔒</div>
+                                    <div class="feature-text">
+                                        <h4>Bảo mật tuyệt đối</h4>
+                                        <p>Ảnh của bạn không được lưu trữ hoặc chia sẻ</p>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">📚</div>
+                                    <div class="feature-text">
+                                        <h4>Kiến thức chuyên môn</h4>
+                                        <p>Blog và từ điển từ các chuyên gia thực phẩm</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn-immersive btn-immersive-primary" onclick="showPage('detection')">
+                                <span>Dùng thử miễn phí</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                        <div class="why-visual">
+                            <img src="https://images.pexels.com/photos/4393021/pexels-photo-4393021.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="AI Technology" class="why-image">
+                            <div class="floating-badge badge-1">
+                                <span class="badge-number">95%</span>
+                                <span class="badge-text">Độ chính xác</span>
+                            </div>
+                            <div class="floating-badge badge-2">
+                                <span class="badge-number">2s</span>
+                                <span class="badge-text">Thời gian phân tích</span>
+                            </div>
+                            <div class="floating-badge badge-3">
+                                <span class="badge-number">1000+</span>
+                                <span class="badge-text">Người dùng</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Useful Tips -->
+                <section class="tips-section">
+                    <h3 class="section__title">Mẹo hữu ích</h3>
+                    <div class="tips-grid" id="tips-container">
+                        <!-- Tips will be populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Featured Blog -->
+                <section class="featured-blog">
+                    <h3 class="section__title">Blog nổi bật</h3>
+                    <div class="blog-featured-grid" id="featured-blogs">
+                        <!-- Featured blogs will be populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Daily Question Widget -->
+                <section class="daily-question">
+                    <div class="question-card">
+                        <h4 class="question-title">🤔 Câu hỏi của ngày</h4>
+                        <p class="question-text" id="daily-question-text">Đang tải câu hỏi...</p>
+                        <div class="question-answer hidden" id="daily-answer">
+                            <p><strong>Trả lời:</strong> <span id="daily-answer-text"></span></p>
+                            <p class="question-tip" id="daily-tip"></p>
+                        </div>
+                        <button class="btn btn--secondary btn--sm" onclick="showDailyAnswer()">Xem đáp án</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Blog Listing Page -->
+        <div id="blog-page" class="page">
+            <div class="container">
+                <div class="blog-header">
+                    <h2>Blog An Toàn Thực Phẩm</h2>
+                    <p>Kiến thức và mẹo hay về thực phẩm sạch</p>
+                </div>
+
+                <div class="blog-controls">
+                    <div class="search-box">
+                        <input type="text" class="form-control" id="blog-search" placeholder="🔍 Tìm kiếm bài viết...">
+                    </div>
+                    <div class="category-filters">
+                        <button class="filter-btn active" onclick="filterBlogByCategory('')">Tất cả</button>
+                        <button class="filter-btn" onclick="filterBlogByCategory('An toàn thực phẩm')">An toàn thực phẩm</button>
+                        <button class="filter-btn" onclick="filterBlogByCategory('Mẹo nấu ăn')">Mẹo nấu ăn</button>
+                        <button class="filter-btn" onclick="filterBlogByCategory('Bảo quản thực phẩm')">Bảo quản thực phẩm</button>
+                        <button class="filter-btn" onclick="filterBlogByCategory('Kiến thức dinh dưỡng')">Kiến thức dinh dưỡng</button>
+                    </div>
+                </div>
+
+                <div class="blog-grid" id="blog-list">
+                    <!-- Blog posts will be populated by JS -->
+                </div>
+
+                <div class="popular-tags">
+                    <h4>Thẻ phổ biến</h4>
+                    <div class="tags-cloud" id="popular-tags">
+                        <!-- Tags will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Individual Blog Post -->
+        <div id="blog-post-page" class="page">
+            <div class="container">
+                <button class="btn btn--secondary back-btn" onclick="showPage('blog')">← Về danh sách blog</button>
+                
+                <article class="blog-post" id="blog-post-content">
+                    <!-- Blog post content will be populated by JS -->
+                </article>
+
+                <div class="related-posts" id="related-posts">
+                    <h4>Bài viết liên quan</h4>
+                    <div class="related-grid" id="related-posts-grid">
+                        <!-- Related posts will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dictionary Page -->
+        <div id="dictionary-page" class="page">
+            <div class="container">
+                <div class="dict-header">
+                    <h2>Từ điển độ tươi thịt</h2>
+                    <p>Hướng dẫn chi tiết nhận biết chất lượng từng loại thịt</p>
+                </div>
+
+                <div class="meat-selection">
+                    <div class="meat-tabs">
+                        <button class="meat-tab active" onclick="selectMeatType('pork')">
+                            <span class="tab-icon">🐷</span>
+                            <span class="tab-label">Thịt Heo</span>
+                        </button>
+                        <button class="meat-tab" onclick="selectMeatType('beef')">
+                            <span class="tab-icon">🐮</span>
+                            <span class="tab-label">Thịt Bò</span>
+                        </button>
+                        <button class="meat-tab" onclick="selectMeatType('chicken')">
+                            <span class="tab-icon">🐔</span>
+                            <span class="tab-label">Thịt Gà</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="meat-content" class="meat-content">
+                    <!-- Meat content with slider will be populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Meat Detail Page -->
+        <div id="meat-detail-page" class="page">
+            <div class="container">
+                <button class="btn btn--secondary back-btn" id="back-to-dict">← Quay lại từ điển</button>
+                
+                <div class="detail-hero" id="detail-hero">
+                    <!-- Detail hero will be populated by JS -->
+                </div>
+
+                <div class="detail-content" id="detail-content">
+                    <!-- Detail sections will be populated by JS -->
+                </div>
+
+                <div class="meat-faq" id="meat-faq">
+                    <!-- FAQ will be populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Detection Page -->
+        <div id="detection-page" class="page">
+            <div class="container">
+                <div class="detection-header">
+                    <h2>Kiểm tra độ tươi bằng AI</h2>
+                    <p>Công nghệ AI hiện đại giúp phân tích chính xác độ tươi của thịt</p>
+                </div>
+                
+                <div class="detection-content">
+                    <div class="camera-container">
+                        <video id="video" class="camera-preview" autoplay muted playsinline></video>
+                        <canvas id="canvas" class="camera-canvas"></canvas>
+                        <div id="captured-image" class="captured-image hidden">
+                            <img id="captured-img" alt="Ảnh đã chụp">
+                        </div>
+                        <div class="camera-overlay">
+                            <div class="camera-frame">
+                                <div class="frame-corners"></div>
+                                <div class="scan-line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="camera-controls">
+                        <button id="start-camera" class="btn btn--primary">📹 Mở camera</button>
+                        <button id="take-photo" class="btn btn--primary hidden">📸 Chụp ảnh</button>
+                        <button id="retake-photo" class="btn btn--secondary hidden">🔄 Chụp lại</button>
+                        <button id="analyze-photo" class="btn btn--primary hidden">🤖 Phân tích AI</button>
+                        <button id="upload-photo" class="btn btn--secondary">📤 Tải ảnh lên</button>
+                        <input id="upload-input" type="file" accept="image/*" class="hidden">
+                    </div>
+
+                    <div class="detection-steps">
+                        <h4>📋 Hướng dẫn từng bước:</h4>
+                        <ol>
+                            <li>Nhấn "Mở camera" để kích hoạt</li>
+                            <li>Đặt thịt trong khung hình</li>
+                            <li>Chụp ảnh khi ánh sáng đủ</li>
+                            <li>Nhấn "Phân tích AI" để nhận kết quả</li>
+                        </ol>
+                    </div>
+
+                    <div id="analysis-result" class="analysis-result hidden">
+                        <!-- Analysis results will be populated by JS -->
+                    </div>
+
+                    <div class="detection-tips">
+                        <h4>💡 Mẹo chụp ảnh hiệu quả:</h4>
+                        <ul>
+                            <li>📸 Đảm bảo ánh sáng đủ và tự nhiên</li>
+                            <li>⚪ Đặt thịt trên nền trắng hoặc sáng màu</li>
+                            <li>📱 Giữ camera ổn định, không bị rung</li>
+                            <li>📐 Chụp từ góc độ thẳng, không bị nghiêng</li>
+                            <li>🔍 Đưa thịt vào giữa khung hình</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Page -->
+        <div id="admin-page" class="page">
+            <div class="container">
+                <button class="btn btn--secondary back-btn" onclick="showPage('home')">← Về trang chủ</button>
+                
+                <div id="admin-login" class="admin-login">
+                    <div class="login-form">
+                        <h2>🔐 Quản trị viên</h2>
+                        <div class="form-group">
+                            <label class="form-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="admin-username" placeholder="admin">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="admin-password" placeholder="123456">
+                        </div>
+                        <button class="btn btn--primary btn--full-width" onclick="adminLogin()">Đăng nhập</button>
+                        <p class="login-hint">💡 Thông tin: admin / 123456</p>
+                    </div>
+                </div>
+
+                <div id="admin-dashboard" class="admin-dashboard hidden">
+                    <div class="admin-header">
+                        <h2>📊 Dashboard Quản Trị</h2>
+                        <div class="admin-stats">
+                            <div class="admin-stat">
+                                <span class="stat-label">Blog posts</span>
+                                <span class="stat-value">5</span>
+                            </div>
+                            <div class="admin-stat">
+                                <span class="stat-label">Lượt xem</span>
+                                <span class="stat-value">1,247</span>
+                            </div>
+                            <div class="admin-stat">
+                                <span class="stat-label">Meat types</span>
+                                <span class="stat-value">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" onclick="showAdminSection('blog')">📝 Quản lý Blog</button>
+                        <button class="admin-tab" onclick="showAdminSection('meat')">🥩 Quản lý Thịt</button>
+                        <button class="admin-tab" onclick="showAdminSection('analytics')">📈 Thống kê</button>
+                    </div>
+
+                    <!-- Blog Management -->
+                    <div id="admin-blog" class="admin-section active">
+                        <div class="admin-controls">
+                            <button class="btn btn--primary" onclick="showBlogEditor()">➕ Tạo bài viết mới</button>
+                            <select class="form-control" id="blog-select">
+                                <option value="">Chọn bài viết để chỉnh sửa</option>
+                            </select>
+                        </div>
+
+                        <div id="blog-editor" class="blog-editor hidden">
+                            <form id="blog-form">
+                                <div class="form-group">
+                                    <label class="form-label">Tiêu đề</label>
+                                    <input type="text" class="form-control" id="blog-title">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tóm tắt</label>
+                                    <textarea class="form-control" id="blog-excerpt" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Danh mục</label>
+                                    <select class="form-control" id="blog-category">
+                                        <option value="An toàn thực phẩm">An toàn thực phẩm</option>
+                                        <option value="Mẹo nấu ăn">Mẹo nấu ăn</option>
+                                        <option value="Bảo quản thực phẩm">Bảo quản thực phẩm</option>
+                                        <option value="Kiến thức dinh dưỡng">Kiến thức dinh dưỡng</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nội dung</label>
+                                    <textarea class="form-control" id="blog-content" rows="10"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tags (phân cách bằng dấu phẩy)</label>
+                                    <input type="text" class="form-control" id="blog-tags">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn--primary" onclick="saveBlogPost()">💾 Lưu bài viết</button>
+                                    <button type="button" class="btn btn--secondary" onclick="previewBlogPost()">👁️ Xem trước</button>
+                                    <button type="button" class="btn btn--outline" onclick="closeBlogEditor()">❌ Hủy</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Meat Management -->
+                    <div id="admin-meat" class="admin-section">
+                        <div class="admin-controls">
+                            <select id="meat-type-select" class="form-control">
+                                <option value="pork">Thịt Heo</option>
+                                <option value="beef">Thịt Bò</option>
+                                <option value="chicken">Thịt Gà</option>
+                            </select>
+                            <select id="freshness-level-select" class="form-control">
+                                <option value="5">Level 5 - Tươi mới</option>
+                                <option value="4">Level 4 - Tươi dùng ngay</option>
+                                <option value="3">Level 3 - Cần lưu ý</option>
+                                <option value="2">Level 2 - Gần hỏng</option>
+                                <option value="1">Level 1 - Không an toàn</option>
+                            </select>
+                            <button class="btn btn--primary" onclick="loadMeatData()">📋 Tải dữ liệu</button>
+                        </div>
+
+                        <form id="meat-form" class="edit-form">
+                            <div class="form-group">
+                                <label class="form-label">Tên cấp độ</label>
+                                <input type="text" class="form-control" id="edit-name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Màu sắc</label>
+                                <input type="color" class="form-control" id="edit-color">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tính chất</label>
+                                <textarea class="form-control" id="edit-properties" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Dấu hiệu nhận biết</label>
+                                <textarea class="form-control" id="edit-signs" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cách bảo quản</label>
+                                <textarea class="form-control" id="edit-storage" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chế biến</label>
+                                <textarea class="form-control" id="edit-cooking" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cảnh báo</label>
+                                <textarea class="form-control" id="edit-warnings" rows="3"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn--primary" onclick="saveMeatData()">💾 Lưu thay đổi</button>
+                                <button type="button" class="btn btn--secondary" onclick="previewMeatData()">👁️ Xem trước</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Analytics -->
+                    <div id="admin-analytics" class="admin-section">
+                        <div class="analytics-grid">
+                            <div class="analytics-card">
+                                <h4>📊 Thống kê truy cập</h4>
+                                <div class="metric">
+                                    <span class="metric-label">Trang được xem nhiều nhất:</span>
+                                    <span class="metric-value">Kiểm tra thịt</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Blog phổ biến:</span>
+                                    <span class="metric-value">5 dấu hiệu nhận biết thịt bò</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Thời gian truy cập trung bình:</span>
+                                    <span class="metric-value">3 phút 24 giây</span>
+                                </div>
+                            </div>
+                            <div class="analytics-card">
+                                <h4>🔍 Từ khóa tìm kiếm</h4>
+                                <div class="search-keywords">
+                                    <span class="keyword">thịt bò tươi</span>
+                                    <span class="keyword">bảo quản thịt</span>
+                                    <span class="keyword">kiểm tra độ tươi</span>
+                                    <span class="keyword">thịt heo</span>
+                                    <span class="keyword">an toàn thực phẩm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-footer">
+                        <button class="btn btn--secondary" onclick="adminLogout()">🚪 Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading overlay -->
+    <div id="loading" class="loading hidden">
+        <div class="loading__spinner"></div>
+        <p>Đang phân tích bằng AI...</p>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast" class="toast hidden">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeAuthModal()"></div>
+        <div class="modal-content auth-modal-content">
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
+
+            <!-- Toggle between Login/Register -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Đăng nhập</button>
+                <button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">Đăng ký</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form active">
+                <h2 class="auth-title">Đăng nhập</h2>
+                <p class="auth-subtitle">Chào mừng trở lại! 👋</p>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Tên đăng nhập</label>
+                        <input type="text" id="login-username" class="form-input" required placeholder="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Đăng nhập</button>
+                </form>
+
+                <p class="auth-footer">
+                    Chưa có tài khoản? <a href="#" onclick="switchAuthTab('register'); return false;">Đăng ký ngay</a>
+                </p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="auth-form">
+                <h2 class="auth-title">Đăng ký tài khoản</h2>
+                <p class="auth-subtitle">Tham gia cộng đồng thịt tươi! 🥩</p>
+
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>Tên đăng nhập</label>
+                        <input type="text" id="register-username" class="form-input" required placeholder="username" minlength="3">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên hiển thị</label>
+                        <input type="text" id="register-displayname" class="form-input" placeholder="Tên của bạn">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="password" id="register-password" class="form-input" required placeholder="••••••••" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Xác nhận mật khẩu</label>
+                        <input type="password" id="register-password-confirm" class="form-input" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Tạo tài khoản</button>
+                </form>
+
+                <p class="auth-footer">
+                    Đã có tài khoản? <a href="#" onclick="switchAuthTab('login'); return false;">Đăng nhập</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="profile-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeProfileModal()"></div>
+        <div class="modal-content profile-modal-content">
+            <button class="modal-close" onclick="closeProfileModal()">×</button>
+
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-info">
+                    <h2 class="profile-name" id="profile-display-name">User</h2>
+                    <p class="profile-username" id="profile-username">@username</p>
+                    <span class="profile-role" id="profile-role">User</span>
+                </div>
+            </div>
+
+            <div class="profile-tabs">
+                <button class="profile-tab active" onclick="switchProfileTab('history')">Lịch sử kiểm tra</button>
+                <button class="profile-tab" onclick="switchProfileTab('saved')">Bài viết đã lưu</button>
+            </div>
+
+            <div id="profile-history" class="profile-tab-content active">
+                <h3>Lịch sử kiểm tra thịt</h3>
+                <div id="history-list" class="history-list">
+                    <p class="empty-state">Chưa có lịch sử kiểm tra</p>
+                </div>
+            </div>
+
+            <div id="profile-saved" class="profile-tab-content">
+                <h3>Bài viết đã lưu</h3>
+                <div id="saved-list" class="saved-list">
+                    <p class="empty-state">Chưa có bài viết đã lưu</p>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn btn--secondary" onclick="handleLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unicode polyfill MUST load FIRST -->
+    <script type="module" src="unicode-polyfill.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script src="auth-ui.js"></script>
+    <script src="app.js"></script>
+    <script src="api_integration.js" defer></script>
+</body>
+</html>
