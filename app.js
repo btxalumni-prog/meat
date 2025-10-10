@@ -1,5 +1,26 @@
-// Enhanced application data
-const appData = {
+let appData = {
+  blogPosts: [],
+  meatTypes: {},
+  popularTags: [],
+  dailyQuestion: {
+    question: "Thịt bò tươi có màu gì?",
+    answer: "Thịt bò tươi có màu đỏ tươi đặc trưng",
+    tip: "Tránh thịt có màu nâu sẫm hoặc xám"
+  }
+};
+
+async function loadAppData() {
+  if (typeof dataManager !== 'undefined' && dataManager.initialized) {
+    appData.meatTypes = dataManager.getDictionary();
+    appData.blogPosts = dataManager.getBlogPosts();
+    appData.popularTags = dataManager.getPopularTags();
+    console.log('App data loaded from dataManager');
+  } else {
+    console.warn('DataManager not initialized yet');
+  }
+}
+
+const appDataOld = {
   blogPosts: [
     {
       id: 1,
@@ -483,8 +504,15 @@ function animateCounter(element, start, end, duration) {
 }
 
 // Initialize the app
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM Content Loaded'); // Debug log
+document.addEventListener('DOMContentLoaded', async function() {
+  console.log('DOM Content Loaded');
+
+  if (typeof dataManager !== 'undefined') {
+    await dataManager.initialize();
+    dataManager.loadFromLocalStorage();
+    await loadAppData();
+  }
+
   loadHomePage();
   showPage('home');
   initializeCamera();
@@ -492,16 +520,14 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeScrollAnimations();
   initializeCounterAnimations();
 
-  // Initialize blog search
   const blogSearch = document.getElementById('blog-search');
   if (blogSearch) {
     blogSearch.addEventListener('input', handleBlogSearch);
   }
 
-  // Show daily "Did you know" after 5 seconds
   setTimeout(showDidYouKnow, 5000);
 
-  console.log('App initialized successfully'); // Debug log
+  console.log('App initialized successfully');
 });
 
 // Home page functions
@@ -1649,15 +1675,20 @@ console.log('App script loaded successfully'); // Debug log
 // ============================================
 
 window.handleSaveArticle = async function(articleType, articleId, articleTitle) {
-  if (!window.authSystem || !window.authSystem.isAuthenticated()) {
-    showToast('Vui lòng đăng nhập để lưu bài viết', 'error');
-    openAuthModal();
+  if (!isAuthenticated()) {
+    showToast('Vui lòng đăng nhập để lưu bài viết', 'warning');
+    openAuthModal('login');
     return;
   }
 
-  const result = await window.authSystem.saveArticle(articleType, articleId, articleTitle);
-  if (!result.error) {
-    // Update button state
+  try {
+    if (dataManager.isBlogSaved(articleId)) {
+      showToast('Bài viết đã được lưu trước đó', 'info');
+      return;
+    }
+
+    dataManager.saveBlog(articleId);
+
     const buttons = document.querySelectorAll(`button[onclick*="${articleId}"]`);
     buttons.forEach(btn => {
       if (btn.textContent.includes('Lưu')) {
@@ -1666,6 +1697,10 @@ window.handleSaveArticle = async function(articleType, articleId, articleTitle) 
         btn.disabled = true;
       }
     });
+
+    showToast('Bài viết đã được lưu', 'success');
+  } catch (error) {
+    showToast(error.message || 'Không thể lưu bài viết', 'error');
   }
 };
 

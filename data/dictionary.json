@@ -1,0 +1,92 @@
+{
+  "beef": {
+    "name": "Thịt Bò",
+    "description": "Thịt bò là nguồn protein chất lượng cao, giàu sắt và vitamin B12",
+    "levels": {
+      "fresh": {
+        "name": "Tươi tốt",
+        "color": "#22c55e",
+        "properties": "Màu đỏ tươi, bề mặt khô ráo",
+        "signs": "Không có mùi lạ, đàn hồi tốt khi ấn",
+        "storage": "Bảo quản trong tủ lạnh 3-5 ngày, tủ đông 6-12 tháng",
+        "tips": "Nên dùng trong vòng 2-3 ngày để đảm bảo chất lượng tốt nhất"
+      },
+      "acceptable": {
+        "name": "Chấp nhận được",
+        "color": "#eab308",
+        "properties": "Màu hơi sẫm, bề mặt hơi ẩm",
+        "signs": "Mùi nhẹ, độ đàn hồi giảm",
+        "storage": "Nên dùng ngay trong ngày hoặc nấu chín để bảo quản",
+        "tips": "Có thể sử dụng nhưng nên nấu kỹ và kiểm tra cẩn thận"
+      },
+      "spoiled": {
+        "name": "Không tươi",
+        "color": "#ef4444",
+        "properties": "Màu nâu xám, bề mặt nhớt",
+        "signs": "Mùi hôi thối, mất đàn hồi",
+        "storage": "Không nên sử dụng, vứt bỏ ngay",
+        "tips": "Tuyệt đối không sử dụng vì có thể gây ngộ độc thực phẩm"
+      }
+    }
+  },
+  "pork": {
+    "name": "Thịt Heo",
+    "description": "Thịt heo là nguồn protein phổ biến, chứa nhiều vitamin B1 và kẽm",
+    "levels": {
+      "fresh": {
+        "name": "Tươi tốt",
+        "color": "#22c55e",
+        "properties": "Màu hồng nhạt, bề mặt khô",
+        "signs": "Mùi tự nhiên, đàn hồi cao",
+        "storage": "Tủ lạnh 3-5 ngày, tủ đông 4-6 tháng",
+        "tips": "Thịt heo tươi có mùi thơm nhẹ và độ đàn hồi cao"
+      },
+      "acceptable": {
+        "name": "Chấp nhận được",
+        "color": "#eab308",
+        "properties": "Màu hơi xám, độ ẩm cao",
+        "signs": "Mùi hơi nặng, đàn hồi trung bình",
+        "storage": "Dùng ngay hoặc nấu chín trong ngày",
+        "tips": "Nên rửa sạch và nấu ở nhiệt độ cao"
+      },
+      "spoiled": {
+        "name": "Không tươi",
+        "color": "#ef4444",
+        "properties": "Màu xám đen, bề mặt nhầy",
+        "signs": "Mùi thối, mềm nhũn",
+        "storage": "Vứt bỏ ngay lập tức",
+        "tips": "Không sử dụng để tránh nguy cơ nhiễm khuẩn"
+      }
+    }
+  },
+  "chicken": {
+    "name": "Thịt Gà",
+    "description": "Thịt gà ít béo, giàu protein và dễ tiêu hóa",
+    "levels": {
+      "fresh": {
+        "name": "Tươi tốt",
+        "color": "#22c55e",
+        "properties": "Màu hồng nhạt đến trắng ngà",
+        "signs": "Da căng mịn, không mùi lạ",
+        "storage": "Tủ lạnh 1-2 ngày, tủ đông 9-12 tháng",
+        "tips": "Thịt gà dễ hỏng, nên dùng sớm hoặc đông lạnh ngay"
+      },
+      "acceptable": {
+        "name": "Chấp nhận được",
+        "color": "#eab308",
+        "properties": "Màu hơi xám, da hơi mềm",
+        "signs": "Mùi nhẹ, độ đàn hồi giảm",
+        "storage": "Nấu ngay trong ngày",
+        "tips": "Rửa sạch và nấu chín kỹ ở nhiệt độ cao"
+      },
+      "spoiled": {
+        "name": "Không tươi",
+        "color": "#ef4444",
+        "properties": "Màu xám xanh, da nhớt",
+        "signs": "Mùi tanh thối rất nặng",
+        "storage": "Loại bỏ ngay",
+        "tips": "Thịt gà hỏng rất nguy hiểm, không dùng trong mọi trường hợp"
+      }
+    }
+  }
+}

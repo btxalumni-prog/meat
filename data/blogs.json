@@ -1,0 +1,74 @@
+{
+  "posts": [
+    {
+      "id": "blog-001",
+      "title": "Bí quyết chọn thịt bò tươi ngon cho bữa ăn gia đình",
+      "excerpt": "Học cách nhận biết thịt bò tươi qua màu sắc, mùi vị và độ đàn hồi. Những mẹo đơn giản giúp bạn chọn được thịt bò chất lượng tốt nhất.",
+      "content": "Thịt bò tươi ngon là yếu tố quan trọng tạo nên món ăn thành công. Khi chọn mua thịt bò, bạn cần chú ý đến màu sắc - thịt bò tươi có màu đỏ tươi đặc trưng, không quá sẫm màu. Bề mặt thịt khô ráo, không nhớt hay ướt át. Khi ấn nhẹ vào thịt, nó sẽ đàn hồi trở lại nhanh chóng. Mùi của thịt bò tươi rất nhẹ nhàng, không có mùi tanh hay hôi. Ngoài ra, bạn nên mua thịt ở những cửa hàng uy tín, có nguồn gốc rõ ràng. Thịt bò sau khi mua về nên được bảo quản trong ngăn mát tủ lạnh nếu dùng trong 2-3 ngày, hoặc đông lạnh nếu cần bảo quản lâu hơn.",
+      "category": "Mẹo hay",
+      "tags": ["thịt bò", "mua sắm", "chọn thịt"],
+      "publishDate": "2024-01-15",
+      "readTime": "5 phút đọc",
+      "author": "Chuyên gia thực phẩm"
+    },
+    {
+      "id": "blog-002",
+      "title": "Cách bảo quản thịt heo đúng cách tránh hư hỏng",
+      "excerpt": "Hướng dẫn chi tiết các phương pháp bảo quản thịt heo an toàn, từ bảo quản ngắn hạn đến dài hạn.",
+      "content": "Bảo quản thịt heo đúng cách là kỹ năng quan trọng giúp giữ được độ tươi và chất lượng của thịt. Đối với bảo quản ngắn hạn (1-2 ngày), bạn nên rửa sạch thịt, để ráo nước, sau đó cho vào hộp kín hoặc túi zip và đặt trong ngăn mát tủ lạnh ở nhiệt độ 0-4°C. Nếu cần bảo quản lâu hơn, phương pháp đông lạnh là tốt nhất. Thịt cần được cắt thành từng phần vừa đủ cho một lần nấu, gói kín trong túi zip (loại bỏ hết không khí), dán nhãn ghi ngày đông và bảo quản ở ngăn đá ở nhiệt độ -18°C. Khi rã đông, không nên rã ở nhiệt độ phòng mà nên chuyển thịt từ ngăn đá sang ngăn mát tối thiểu 8 tiếng trước khi nấu. Tuyệt đối không đông lại thịt đã rã đông.",
+      "category": "Bảo quản",
+      "tags": ["thịt heo", "bảo quản", "tủ lạnh"],
+      "publishDate": "2024-01-18",
+      "readTime": "6 phút đọc",
+      "author": "Chuyên gia dinh dưỡng"
+    },
+    {
+      "id": "blog-003",
+      "title": "5 dấu hiệu nhận biết thịt gà đã hỏng",
+      "excerpt": "Những dấu hiệu cảnh báo giúp bạn tránh sử dụng thịt gà không còn tươi, bảo vệ sức khỏe gia đình.",
+      "content": "Thịt gà là loại thịt dễ hỏng nhất trong các loại thịt gia súc, gia cầm. Dấu hiệu đầu tiên là mùi - thịt gà hỏng có mùi hôi, tanh rất khó chịu. Thứ hai là màu sắc - thịt gà tươi có màu hồng nhạt, khi hỏng sẽ chuyển sang màu xám, xanh hoặc có những đốm đen. Thứ ba là kết cấu - da gà tươi căng mịn, khi hỏng sẽ trở nên nhớt, trơn và dễ rách. Thứ tư là độ đàn hồi - thịt gà tươi khi ấn vào sẽ nảy lại, thịt hỏng sẽ lõm xuống và không trở lại. Cuối cùng là thời gian bảo quản - nếu thịt gà để trong tủ lạnh quá 2 ngày hoặc trong tủ đông quá 12 tháng thì không nên dùng nữa. Khi phát hiện bất kỳ dấu hiệu nào, tuyệt đối không sử dụng thịt gà đó để tránh ngộ độc thực phẩm.",
+      "category": "An toàn thực phẩm",
+      "tags": ["thịt gà", "an toàn", "nhận biết"],
+      "publishDate": "2024-01-22",
+      "readTime": "4 phút đọc",
+      "author": "Chuyên gia thực phẩm"
+    },
+    {
+      "id": "blog-004",
+      "title": "Thịt đông lạnh vs thịt tươi: Loại nào tốt hơn?",
+      "excerpt": "So sánh chi tiết giữa thịt đông lạnh và thịt tươi về mặt dinh dưỡng, an toàn và cách sử dụng.",
+      "content": "Nhiều người cho rằng thịt tươi luôn tốt hơn thịt đông lạnh, nhưng sự thật không hoàn toàn như vậy. Về mặt dinh dưỡng, nếu được đông lạnh đúng cách ngay sau khi giết mổ, thịt đông lạnh có thể giữ được gần như toàn bộ giá trị dinh dưỡng. Thậm chí, thịt đông lạnh còn an toàn hơn thịt tươi trong một số trường hợp vì quá trình đông lạnh có thể tiêu diệt một số ký sinh trùng. Tuy nhiên, thịt tươi có ưu điểm là kết cấu và hương vị tự nhiên hơn, đặc biệt khi chế biến các món nướng, áp chảo. Lựa chọn nào tốt hơn phụ thuộc vào mục đích sử dụng: nếu nấu súp, hầm thì thịt đông lạnh hoàn toàn phù hợp; nếu làm bít tết, sashimi thì nên dùng thịt tươi. Quan trọng nhất là nguồn gốc xuất xứ rõ ràng và bảo quản đúng cách.",
+      "category": "Kiến thức",
+      "tags": ["so sánh", "đông lạnh", "thịt tươi"],
+      "publishDate": "2024-01-25",
+      "readTime": "7 phút đọc",
+      "author": "Tiến sĩ Dinh dưỡng"
+    },
+    {
+      "id": "blog-005",
+      "title": "Rã đông thịt đúng cách để giữ nguyên chất lượng",
+      "excerpt": "Các phương pháp rã đông thịt an toàn và hiệu quả, giúp thịt không mất chất lượng và dinh dưỡng.",
+      "content": "Rã đông thịt đúng cách là yếu tố quan trọng ảnh hưởng đến chất lượng món ăn. Phương pháp tốt nhất là rã đông từ từ trong tủ lạnh: chuyển thịt từ ngăn đá sang ngăn mát ít nhất 8-12 tiếng trước khi nấu. Phương pháp này giữ được độ tươi và dinh dưỡng tốt nhất. Nếu gấp, bạn có thể ngâm thịt (đã gói kín) trong nước lạnh, thay nước mỗi 30 phút. Không nên rã đông ở nhiệt độ phòng vì vi khuẩn phát triển rất nhanh ở 5-60°C. Tuyệt đối không dùng nước nóng để rã đông vì sẽ làm thịt bị chín bên ngoài nhưng vẫn đông bên trong. Lò vi sóng có chức năng defrost cũng là lựa chọn nhanh, nhưng cần nấu ngay sau khi rã đông. Thịt đã rã đông không được đông lại vì chất lượng và an toàn sẽ giảm đáng kể.",
+      "category": "Mẹo hay",
+      "tags": ["rã đông", "bảo quản", "chế biến"],
+      "publishDate": "2024-01-28",
+      "readTime": "5 phút đọc",
+      "author": "Chuyên gia ẩm thực"
+    }
+  ],
+  "categories": [
+    "Tất cả",
+    "Mẹo hay",
+    "Bảo quản",
+    "An toàn thực phẩm",
+    "Kiến thức"
+  ],
+  "popularTags": [
+    "thịt bò",
+    "thịt heo",
+    "thịt gà",
+    "bảo quản",
+    "an toàn thực phẩm",
+    "rã đông"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "savedMeats": [
+    {
+      "id": "saved-meat-001",
+      "userId": "user-demo-001",
+      "meatType": "beef",
+      "freshnessLevel": "fresh",
+      "imageUrl": "https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg",
+      "confidence": 95,
+      "notes": "Thịt bò tươi mua tại siêu mart",
+      "savedAt": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "savedBlogs": [
+    {
+      "id": "saved-blog-001",
+      "userId": "user-demo-001",
+      "blogId": "blog-001",
+      "savedAt": "2024-01-16T09:20:00Z"
+    }
+  ],
+  "nextMeatId": 2,
+  "nextBlogSaveId": 2
+}
